@@ -6,39 +6,41 @@ function Pokemon(name, level, health, attack) {
     this.attack = attack;
 }
 
-Pokemon.prototype.attackOpponent = function(opponent) {
-    console.log(`${this.name} attacks ${opponent.name}!`);
-    opponent.health -= this.attack; 
-    console.log(`${opponent.name}'s health reduced to ${opponent.health}`);
+// Attack Method
+Pokemon.prototype.attackOpponent = function(target) {
+    console.log(`${this.name} attacks ${target.name}!`);
+    target.health -= this.attack;
+    console.log(`${target.name}'s health reduced to ${target.health}`);
 };
 
-function Trainer(name, age) {
-    this.name = name;
-    this.age = age;
-    this.pokemonList = [];
-}
+// Trainer
+let trainer = {
+    name: 'Yugi',
+    age: 19,
+    team: [],
 
-Trainer.prototype.addPokemon = function(pokemon) {
-    this.pokemonList.push(pokemon);
-    console.log(`${pokemon.name} added to ${this.name}'s team!`);
+    // Add Pokemon to team
+    addPokemon: function(pokemon) {
+        this.team.push(pokemon);
+        console.log(`${pokemon.name} added to ${this.name}'s team!`);
+    }
 };
 
 let mewtwo = new Pokemon('Mewtwo', 3, 100, 60);
 let bulbasaur = new Pokemon('Bulbasaur', 5, 100, 40);
 let lucario = new Pokemon('Lucario', 4, 100, 55);
 
-let yugi = new Trainer('Yugi', 19);
-
 mewtwo.attackOpponent(bulbasaur);
 bulbasaur.attackOpponent(lucario);
 
-yugi.addPokemon(mewtwo);
-yugi.addPokemon(bulbasaur);
-yugi.addPokemon(lucario);
+trainer.addPokemon(mewtwo);
+trainer.addPokemon(bulbasaur);
+trainer.addPokemon(lucario);
 
+// Display Information
 console.log("");
-console.log(`Trainer: ${yugi.name}, Age: ${yugi.age}`);
-console.log(`Trainer ${yugi.name}'s Pokemon Team:`);
-yugi.pokemonList.forEach(pokemon => {
+console.log(`Trainer: ${trainer.name}, Age: ${trainer.age}`);
+console.log(`Trainer ${trainer.name}'s Pokemon Team:`);
+trainer.team.forEach(pokemon => {
     console.log(`- ${pokemon.name}, Level: ${pokemon.level}, Health: ${pokemon.health}, Attack: ${pokemon.attack}`);
 });
